@@ -1,3 +1,7 @@
+/* src/index.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap');
+
 .container {
   max-width: 800px;
   margin-right: auto;
@@ -10,4 +14,14 @@ img {
 
 body {
   background-color: #333;
+  font-family: 'Roboto', sans-serif;
+}
+
+h1, h2 {
+  font-weight: 700;
+}
+
+.panel {
+  background-color: #edf2f0;
+  border-radius: 4px;
 }
