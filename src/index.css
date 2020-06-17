@@ -1,0 +1,13 @@
+.container {
+  max-width: 800px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+img {
+  max-width: 100%;
+}
+
+body {
+  background-color: #333;
+}
