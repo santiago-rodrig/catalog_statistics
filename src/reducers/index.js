@@ -1,11 +1,12 @@
 // src/reducers/index.js
-const FETCH_COMPANIES = 'FETCH_COMPANIES';
-const reducer = (state={}, action) => {
+
+const reducer = (state = [], action) => {
   switch (action.type) {
-    case FETCH_COMPANIES:
-      return action.companies
+    case 'ADD_COMPANIES':
+      return action.companies;
     default:
-      return state
+      return state;
   }
 };
+
 export default reducer;
