@@ -1,0 +1,20 @@
+.item {
+  composes: panel from '../index.css';
+  max-width: 100%;
+  margin-bottom: 2rem;
+}
+
+.price {
+  color: limegreen;
+}
+
+@media only screen and (min-width: 768px) {
+  .item {
+    float: left;
+    width: 40%;
+  }
+
+  .item:nth-child(2n + 1) {
+    margin-right: 9%;
+  }
+}
