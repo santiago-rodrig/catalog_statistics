@@ -5,6 +5,9 @@ const headingStyles = {
   textAlign: 'center',
   marginTop: 80,
   marginBottom: 80,
+  maxWidth: '80%',
+  marginLeft: 'auto',
+  marginRight: 'auto',
 };
 
 const Component = () => (

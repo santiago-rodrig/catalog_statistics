@@ -1,6 +1,8 @@
 // src/reducers/index.js
 
-const reducer = (state = [], action) => {
+const initialState = JSON.parse(window.localStorage.getItem('companies')) || [];
+
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_COMPANIES':
       return action.companies;

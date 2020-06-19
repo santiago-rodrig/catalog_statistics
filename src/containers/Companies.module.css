@@ -8,10 +8,17 @@
 
 .search_form {
   composes: panel from '../index.css';
+  padding: 0.75rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   max-width: 330px;
+}
+
+.search_form label {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .search_form button {
@@ -33,9 +40,11 @@
 }
 
 .search_form input {
-  margin-left: 1.5rem;
   padding: 0.5rem;
+  margin-left: 0.45rem;
   text-transform: uppercase;
+  border-radius: 4px;
+  border: 1px solid #888;
 }
 
 .search_form input:focus {
