@@ -110,10 +110,29 @@ Details.propTypes = {
   }).isRequired,
 };
 
+const ErrorComponent = () => (
+  <div style={{ marginTop: '6rem' }} className="container">
+    <div className={styles.error_component}>
+      <h1 style={{ marginBottom: '4rem' }}>
+        404 over here,
+        {' '}
+        <strong>
+          {useParams().symbol}
+        </strong>
+        {' '}
+        is not present in the API&apos;s database
+      </h1>
+      <iframe title="not found" src="https://giphy.com/embed/9J7tdYltWyXIY" width="330" height="304" frameBorder="0" className="giphy-embed" allowFullScreen />
+      <p><a href="https://giphy.com/gifs/internet-google-chrone-9J7tdYltWyXIY">via GIPHY</a></p>
+    </div>
+  </div>
+);
+
 const Component = () => {
   const [fetching, setFetching] = useState(true);
   const [companyDetails, setCompanyDetails] = useState(null);
   const [price, setPrice] = useState(null);
+  const [hasError, setHasError] = useState(null);
   const { symbol } = useParams();
 
   useEffect(() => {
@@ -121,7 +140,10 @@ const Component = () => {
       `${APIURL}/stock/${symbol}/company${APIToken}`,
       GETOptions,
     )
-      .then(response => response.json())
+      .then(response => {
+        if (response.status === 200) return response.json();
+        throw new Error();
+      })
       .then(data => {
         const {
           description,
@@ -155,23 +177,33 @@ const Component = () => {
           phone,
           companyName,
         });
+      }, error => {
+        throw error;
       })
       .then(() => (new Promise(resolve => {
         window.setTimeout(() => {
           resolve(window.fetch(`${APIURL}/stock/${symbol}/price${APIToken}`, GETOptions));
         }, 500);
-      })))
-      .then(response => response.json())
+      })), error => {
+        throw error;
+      })
+      .then(response => response.json(), error => {
+        throw error;
+      })
       .then(data => {
         setPrice(data);
         setFetching(false);
+      }, () => {
+        setHasError(true);
+        setFetching(false);
       });
-  }, [setPrice, setCompanyDetails, setFetching, symbol]);
+  }, [setHasError, setPrice, setCompanyDetails, setFetching, symbol]);
 
   let renderedJSX = null;
-
   if (fetching) {
     renderedJSX = <Loading />;
+  } else if (hasError) {
+    renderedJSX = <ErrorComponent />;
   } else {
     renderedJSX = (
       <div className="container">
