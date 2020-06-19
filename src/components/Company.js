@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
-import { connect } from 'react-redux';
 import styles from './Company.module.css';
 import loadingGif from '../images/loading.gif';
 
@@ -84,19 +83,16 @@ Details.propTypes = {
   }).isRequired,
 };
 
-const mapStateToProps = state => ({
-  companies: state,
-});
-
-const Component = ({ companies }) => {
+const Component = () => {
   const [fetching, setFetching] = useState(true);
-  const [companyDetails, setCompanyDetails] = useState({});
+  const [companyDetails, setCompanyDetails] = useState(null);
+  const [price, setPrice] = useState(null);
   const { symbol } = useParams();
-  const company = companies.find(c => c.symbol === symbol.toUpperCase());
+
   useEffect(() => {
     if (fetching) {
       window.fetch(
-        `${APIURL}/stock/${company.symbol.toLowerCase()}/company${APIToken}`,
+        `${APIURL}/stock/${symbol}/company${APIToken}`,
         GETOptions,
       )
         .then(response => response.json())
@@ -114,8 +110,11 @@ const Component = ({ companies }) => {
             zip,
             country,
             phone,
+            exchange,
+            companyName,
           } = data;
           setCompanyDetails({
+            exchange,
             description,
             website,
             CEO,
@@ -128,18 +127,30 @@ const Component = ({ companies }) => {
             zip,
             country,
             phone,
+            companyName,
           });
+        })
+        .then(() => {
+          window.setTimeout(() => {
+            window.fetch(
+              `${APIURL}/stock/${symbol}/price${APIToken}`,
+              GETOptions,
+            )
+              .then(response => response.json())
+              .then(data => setPrice(data));
+          }, 500);
         });
     }
     return () => setFetching(false);
-  }, [companyDetails, setCompanyDetails, company, fetching, setFetching]);
+  }, [setPrice, companyDetails, setCompanyDetails, fetching, setFetching]);
+
   return (
     <>
       <main>
         <h1>
-          {`${company.name} (${company.symbol})`}
+          {`${companyDetails.companyName} (${symbol})`}
         </h1>
-        <p className={styles.lead}>{`${company.price} (${company.exchange})`}</p>
+        <p className={styles.lead}>{`${price} (${companyDetails.exchange})`}</p>
       </main>
       {
         !fetching
@@ -150,10 +161,4 @@ const Component = ({ companies }) => {
   );
 };
 
-Component.propTypes = {
-  companies: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
-
-const Container = connect(mapStateToProps, null)(Component);
-
-export default Container;
+export default Component;
