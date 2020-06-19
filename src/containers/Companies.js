@@ -27,6 +27,10 @@ const Component = ({ companies, updateCompanies }) => {
   const [fetching, setFetching] = useState(false);
 
   useEffect(() => {
+    updateCompanies([]);
+  }, [updateCompanies]);
+
+  useEffect(() => {
     if (fetching) {
       const fragment = inputRef.current.value.toLowerCase();
       (async () => {
