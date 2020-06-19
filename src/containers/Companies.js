@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addCompanies as updateCompanies } from '../actions';
+import { addCompanies as updateCompanies, setExchangeFilter } from '../actions';
 import CompaniesList from '../components/CompaniesList';
 import loadingGif from '../images/loading.gif';
 import styles from './Companies.module.css';
@@ -22,14 +22,18 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   updateCompanies: companies => dispatch(updateCompanies(companies)),
+  resetFilter: () => dispatch(setExchangeFilter('')),
 });
 
-const Component = ({ companies, updateCompanies, exchangeFilter }) => {
+const Component = ({
+  resetFilter, companies, updateCompanies, exchangeFilter,
+}) => {
   const inputRef = useRef();
   const [fetching, setFetching] = useState(false);
 
   useEffect(() => {
     updateCompanies([]);
+    resetFilter();
   }, [updateCompanies]);
 
   useEffect(() => {
@@ -73,6 +77,7 @@ const Component = ({ companies, updateCompanies, exchangeFilter }) => {
   const handleSubmit = e => {
     e.preventDefault();
     setFetching(true);
+    resetFilter();
   };
 
   let renderedJSX = null;
@@ -108,6 +113,7 @@ Component.propTypes = {
   companies: PropTypes.arrayOf(PropTypes.object).isRequired,
   updateCompanies: PropTypes.func.isRequired,
   exchangeFilter: PropTypes.string.isRequired,
+  resetFilter: PropTypes.func.isRequired,
 };
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
