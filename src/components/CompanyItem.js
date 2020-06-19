@@ -5,10 +5,10 @@ import styles from './CompanyItem.module.css';
 
 const Component = ({ company }) => (
   <li className={styles.item}>
-    <h2>
+    <h3>
       {company.name}
       {` (${company.symbol})`}
-    </h2>
+    </h3>
     <p className={styles.price}>{`$ ${company.price}`}</p>
     <p>
       {`${company.exchange} `}

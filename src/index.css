@@ -37,6 +37,10 @@ h1 {
   font-size: 3rem;
 }
 
+h2 {
+  font-size: 2rem;
+}
+
 .panel {
   background-color: #edf2f0;
   border-radius: 4px;
