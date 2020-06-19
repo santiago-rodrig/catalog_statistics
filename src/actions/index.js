@@ -1,8 +1,6 @@
 // src/actions/index.js
 
-const addCompanies = companies => {
-  window.localStorage.setItem('companies', JSON.stringify(companies));
-  return { type: 'ADD_COMPANIES', companies };
-};
+const addCompanies = companies => ({ type: 'ADD_COMPANIES', companies });
+const setExchangeFilter = filter => ({ type: 'SET_EXCHANGE_FILTER', filter });
 
-export default addCompanies;
+export { addCompanies, setExchangeFilter };

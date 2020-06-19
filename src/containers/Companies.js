@@ -1,10 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import updateCompanies from '../actions';
+import { addCompanies as updateCompanies } from '../actions';
 import CompaniesList from '../components/CompaniesList';
 import loadingGif from '../images/loading.gif';
 import styles from './Companies.module.css';
+import FilterForm from '../components/FilterForm';
 
 const APIToken = '?token=Tpk_ef813a81a4e24d0885a504b77399cabc';
 const APIURL = 'https://sandbox.iexapis.com/stable';
@@ -15,7 +16,7 @@ const GETOptions = {
 };
 
 const mapStateToProps = state => ({
-  companies: state,
+  companies: state.companies,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -73,6 +74,19 @@ const Component = ({ companies, updateCompanies }) => {
     setFetching(true);
   };
 
+  let renderedJSX = null;
+
+  if (fetching) {
+    renderedJSX = <img className={styles.loading} src={loadingGif} alt="loading gif" />;
+  } else {
+    renderedJSX = (
+      <>
+        <FilterForm />
+        <CompaniesList companies={companies} />
+      </>
+    );
+  }
+
   return (
     <div className="container">
       <form onSubmit={handleSubmit} className={styles.search_form}>
@@ -84,11 +98,7 @@ const Component = ({ companies, updateCompanies }) => {
           <i className="fas fa-search" />
         </button>
       </form>
-      {
-        fetching
-          ? <img className={styles.loading} src={loadingGif} alt="loading gif" />
-          : <CompaniesList companies={companies} />
-      }
+      {renderedJSX}
     </div>
   );
 };

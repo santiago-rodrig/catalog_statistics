@@ -16,9 +16,6 @@
 
 .search_form label {
   flex-grow: 1;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
 }
 
 .search_form button {
@@ -40,13 +37,6 @@
 }
 
 .search_form input {
-  padding: 0.5rem;
   margin-left: 0.45rem;
   text-transform: uppercase;
-  border-radius: 4px;
-  border: 1px solid #888;
-}
-
-.search_form input:focus {
-  outline-color: limegreen;
 }
