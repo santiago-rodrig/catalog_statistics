@@ -17,13 +17,14 @@ const GETOptions = {
 
 const mapStateToProps = state => ({
   companies: state.companies,
+  exchangeFilter: state.exchangeFilter,
 });
 
 const mapDispatchToProps = dispatch => ({
   updateCompanies: companies => dispatch(updateCompanies(companies)),
 });
 
-const Component = ({ companies, updateCompanies }) => {
+const Component = ({ companies, updateCompanies, exchangeFilter }) => {
   const inputRef = useRef();
   const [fetching, setFetching] = useState(false);
 
@@ -81,8 +82,8 @@ const Component = ({ companies, updateCompanies }) => {
   } else {
     renderedJSX = (
       <>
-        <FilterForm />
-        <CompaniesList companies={companies} />
+        { companies.length !== 0 ? <FilterForm /> : '' }
+        <CompaniesList companies={companies} exchangeFilter={exchangeFilter} />
       </>
     );
   }
@@ -106,6 +107,7 @@ const Component = ({ companies, updateCompanies }) => {
 Component.propTypes = {
   companies: PropTypes.arrayOf(PropTypes.object).isRequired,
   updateCompanies: PropTypes.func.isRequired,
+  exchangeFilter: PropTypes.string.isRequired,
 };
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);

@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './ExchangeFilter.module.css';
 
 const Component = ({ handleChange }) => (
   <div className="field">
     <label htmlFor="exchange">
       Exchange:
-      <input onChange={handleChange} type="text" placeholder="NASDAQ" name="exchange" />
+      <input className={styles.exchange_input} onChange={handleChange} type="text" placeholder="NASDAQ" name="exchange" />
     </label>
   </div>
 );

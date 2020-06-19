@@ -2,24 +2,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CompanyItem from './CompanyItem';
 import styles from './CompaniesList.module.css';
+import filterCompanies from '../lib/filterUtilities';
 
-const Component = ({ companies }) => (
-  <>
-    <h2
-      style={{
-        maxWidth: '80%', textAlign: 'center', margin: '0 auto', marginTop: '3rem',
-      }}
-    >
-      { companies.length === 0 ? 'Search something' : 'Search results' }
-    </h2>
-    <ul className={styles.list}>
-      {companies.map(c => <CompanyItem key={c.symbol} company={c} />)}
-    </ul>
-  </>
-);
+const Component = ({ companies, exchangeFilter }) => {
+  const filteredCompanies = filterCompanies(companies, exchangeFilter);
+  return (
+    <>
+      <h2
+        style={{
+          maxWidth: '80%', textAlign: 'center', margin: '0 auto', marginTop: '3rem',
+        }}
+      >
+        { filteredCompanies.length === 0 ? 'Nothing to show' : 'Search results' }
+      </h2>
+      <ul className={styles.list}>
+        {filteredCompanies.map(c => <CompanyItem key={c.symbol} company={c} />)}
+      </ul>
+    </>
+  );
+};
 
 Component.propTypes = {
   companies: PropTypes.arrayOf(PropTypes.object).isRequired,
+  exchangeFilter: PropTypes.string.isRequired,
 };
 
 export default Component;
