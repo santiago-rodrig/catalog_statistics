@@ -65,6 +65,10 @@ const Component = ({
           GETOptions,
         );
         const data = await response.json();
+        if (data.length === 0) {
+          setFetching(false);
+          return;
+        }
         const exchangeAndSymbol = data.map(c => ({ symbol: c.symbol, exchange: c.exchange }));
         const result = [];
         await new Promise(resolve => {
