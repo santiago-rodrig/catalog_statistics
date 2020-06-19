@@ -5,7 +5,15 @@
 }
 
 .filter_form label {
-  display: flex;
   width: 100%;
-  justify-content: space-evenly;
+  justify-content: space-between;
+}
+
+.filter_form label > * {
+  flex-basis: 50%;
+}
+
+.filter_form span {
+  text-align: right;
+  padding-right: 0.5rem;
 }

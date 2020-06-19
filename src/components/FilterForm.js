@@ -1,5 +1,6 @@
 import React from 'react';
 import ExchangeFilter from '../containers/ExchangeFilter';
+import MinimumFilter from '../containers/MinimumFilter';
 import styles from './FilterForm.module.css';
 
 const Component = () => (
@@ -16,6 +17,7 @@ const Component = () => (
     </h2>
     <form onSubmit={e => e.preventDefault()} className={styles.filter_form}>
       <ExchangeFilter />
+      <MinimumFilter />
     </form>
   </>
 );

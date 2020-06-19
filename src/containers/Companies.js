@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addCompanies as updateCompanies, setExchangeFilter } from '../actions';
+import { addCompanies as updateCompanies, setExchangeFilter, setMinimumFilter } from '../actions';
 import CompaniesList from '../components/CompaniesList';
 import loadingGif from '../images/loading.gif';
 import styles from './Companies.module.css';
@@ -18,22 +18,26 @@ const GETOptions = {
 const mapStateToProps = state => ({
   companies: state.companies,
   exchangeFilter: state.exchangeFilter,
+  minimumFilter: state.minimumFilter,
 });
 
 const mapDispatchToProps = dispatch => ({
   updateCompanies: companies => dispatch(updateCompanies(companies)),
-  resetFilter: () => dispatch(setExchangeFilter('')),
+  resetFilters: () => {
+    dispatch(setExchangeFilter(''));
+    dispatch(setMinimumFilter(''));
+  },
 });
 
 const Component = ({
-  resetFilter, companies, updateCompanies, exchangeFilter,
+  resetFilters, companies, updateCompanies, exchangeFilter, minimumFilter,
 }) => {
   const inputRef = useRef();
   const [fetching, setFetching] = useState(false);
 
   useEffect(() => {
     updateCompanies([]);
-    resetFilter();
+    resetFilters();
   }, [updateCompanies]);
 
   useEffect(() => {
@@ -77,7 +81,7 @@ const Component = ({
   const handleSubmit = e => {
     e.preventDefault();
     setFetching(true);
-    resetFilter();
+    resetFilters();
   };
 
   let renderedJSX = null;
@@ -88,7 +92,11 @@ const Component = ({
     renderedJSX = (
       <>
         { companies.length !== 0 ? <FilterForm /> : '' }
-        <CompaniesList companies={companies} exchangeFilter={exchangeFilter} />
+        <CompaniesList
+          companies={companies}
+          exchangeFilter={exchangeFilter}
+          minimumFilter={minimumFilter}
+        />
       </>
     );
   }
@@ -113,7 +121,8 @@ Component.propTypes = {
   companies: PropTypes.arrayOf(PropTypes.object).isRequired,
   updateCompanies: PropTypes.func.isRequired,
   exchangeFilter: PropTypes.string.isRequired,
-  resetFilter: PropTypes.func.isRequired,
+  resetFilters: PropTypes.func.isRequired,
+  minimumFilter: PropTypes.string.isRequired,
 };
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
