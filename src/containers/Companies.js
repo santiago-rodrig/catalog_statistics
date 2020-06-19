@@ -6,6 +6,7 @@ import {
   setExchangeFilter,
   setMinimumFilter,
   setMaximumFilter,
+  setNameFilter,
 } from '../actions';
 import CompaniesList from '../components/CompaniesList';
 import loadingGif from '../images/loading.gif';
@@ -25,6 +26,7 @@ const mapStateToProps = state => ({
   exchangeFilter: state.exchangeFilter,
   minimumFilter: state.minimumFilter,
   maximumFilter: state.maximumFilter,
+  nameFilter: state.nameFilter,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -33,6 +35,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setExchangeFilter(''));
     dispatch(setMinimumFilter(''));
     dispatch(setMaximumFilter(''));
+    dispatch(setNameFilter(''));
   },
 });
 
@@ -43,6 +46,7 @@ const Component = ({
   exchangeFilter,
   minimumFilter,
   maximumFilter,
+  nameFilter,
 }) => {
   const inputRef = useRef();
   const [fetching, setFetching] = useState(false);
@@ -109,6 +113,7 @@ const Component = ({
           exchangeFilter={exchangeFilter}
           minimumFilter={minimumFilter}
           maximumFilter={maximumFilter}
+          nameFilter={nameFilter}
         />
       </>
     );
@@ -137,6 +142,7 @@ Component.propTypes = {
   resetFilters: PropTypes.func.isRequired,
   minimumFilter: PropTypes.string.isRequired,
   maximumFilter: PropTypes.string.isRequired,
+  nameFilter: PropTypes.string.isRequired,
 };
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);

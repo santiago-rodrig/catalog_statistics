@@ -5,13 +5,14 @@ import styles from './CompaniesList.module.css';
 import filterCompanies from '../lib/filterUtilities';
 
 const Component = ({
-  companies, exchangeFilter, minimumFilter, maximumFilter,
+  companies, exchangeFilter, minimumFilter, maximumFilter, nameFilter,
 }) => {
   const filteredCompanies = filterCompanies(
     companies,
     exchangeFilter,
     minimumFilter,
     maximumFilter,
+    nameFilter,
   );
   return (
     <>
@@ -34,6 +35,7 @@ Component.propTypes = {
   exchangeFilter: PropTypes.string.isRequired,
   minimumFilter: PropTypes.string.isRequired,
   maximumFilter: PropTypes.string.isRequired,
+  nameFilter: PropTypes.string.isRequired,
 };
 
 export default Component;

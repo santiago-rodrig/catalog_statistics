@@ -2,6 +2,7 @@ import React from 'react';
 import ExchangeFilter from '../containers/ExchangeFilter';
 import MinimumFilter from '../containers/MinimumFilter';
 import MaximumFilter from '../containers/MaximumFilter';
+import NameFilter from '../containers/NameFilter';
 import styles from './FilterForm.module.css';
 
 const Component = () => (
@@ -17,6 +18,7 @@ const Component = () => (
       </span>
     </h2>
     <form onSubmit={e => e.preventDefault()} className={styles.filter_form}>
+      <NameFilter />
       <ExchangeFilter />
       <MinimumFilter />
       <MaximumFilter />
