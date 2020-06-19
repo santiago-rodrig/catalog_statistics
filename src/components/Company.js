@@ -175,7 +175,15 @@ const Component = () => {
   } else {
     renderedJSX = (
       <div className="container">
-        <main style={{ textAlign: 'center', marginTop: '6rem' }}>
+        <main
+          style={{
+            textAlign: 'center',
+            marginTop: '6rem',
+            width: '80%',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+          }}
+        >
           <h1>
             {`${companyDetails.companyName} (${symbol.toUpperCase()})`}
           </h1>
@@ -189,7 +197,7 @@ const Component = () => {
             </span>
           </p>
         </main>
-        <hr />
+        <hr style={{ width: '80%' }} />
         <Details companyDetails={companyDetails} />
       </div>
     );

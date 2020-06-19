@@ -27,3 +27,9 @@
   font-size: 80%;
   color: rgba(200, 200, 200, 0.7);
 }
+
+.details_section {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
