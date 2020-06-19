@@ -13,22 +13,33 @@ const GETOptions = {
 };
 
 const Loading = () => (
-  <img src={loadingGif} alt="loading gif" />
+  <div className={styles.loading}>
+    <h1>Fetching data...</h1>
+    <img src={loadingGif} alt="loading gif" />
+  </div>
 );
 
 const Details = ({ companyDetails }) => (
-  <>
-    <section>
+  <div style={{ marginTop: '4rem' }}>
+    <section className={styles.details_section}>
       <h2>What this company dedicates to?</h2>
       <p>
         It works in the
-        {companyDetails.industry}
-        industry, specifically in the
-        {companyDetails.sector}
-        sector.
+        {' '}
+        <strong>
+          {`${companyDetails.industry} `}
+          industry
+        </strong>
+        , specifically in the
+        {' '}
+        <strong>
+          {`${companyDetails.sector} `}
+          sector
+        </strong>
+        .
       </p>
     </section>
-    <section>
+    <section className={styles.details_section}>
       <h2>Website</h2>
       <p>
         {
@@ -38,32 +49,46 @@ const Details = ({ companyDetails }) => (
         }
       </p>
     </section>
-    <section>
+    <section className={styles.details_section}>
       <h2>What else is there to know about this company?</h2>
       <p>
-        Its CEO is
-        {companyDetails.CEO}
-        , and it employs
-        {`${companyDetails.employees} `}
-        people.
+        <strong>
+          Its CEO is
+          {' '}
+          {companyDetails.CEO}
+          {
+            companyDetails.employees
+              ? `, and it employs ${companyDetails.employees} people`
+              : ''
+          }
+        </strong>
+        .
       </p>
-      <p>{companyDetails.description}</p>
       <p>
-        The company is based at
-        {` ${companyDetails.country}`}
-        ,
-        {` ${companyDetails.state}`}
-        ,
-        {` ${companyDetails.city}`}
-        ,
-        {` ${companyDetails.address}`}
-        , ZIP code
-        {` ${companyDetails.zip}`}
-        , phone
-        {` ${companyDetails.phone}`}
+        {companyDetails.description}
+        .
+      </p>
+      <p>
+        The company is
+        {' '}
+        <strong>
+          based at
+          {` ${companyDetails.country}`}
+          ,
+          {` ${companyDetails.state}`}
+          ,
+          {` ${companyDetails.city}`}
+          ,
+          {` ${companyDetails.address}`}
+          , ZIP code
+          {` ${companyDetails.zip}`}
+          , phone
+          {` ${companyDetails.phone}`}
+        </strong>
+        .
       </p>
     </section>
-  </>
+  </div>
 );
 
 Details.propTypes = {
@@ -149,15 +174,24 @@ const Component = () => {
     renderedJSX = <Loading />;
   } else {
     renderedJSX = (
-      <>
-        <main>
+      <div className="container">
+        <main style={{ textAlign: 'center', marginTop: '6rem' }}>
           <h1>
-            {`${companyDetails.companyName} (${symbol})`}
+            {`${companyDetails.companyName} (${symbol.toUpperCase()})`}
           </h1>
-          <p className={styles.lead}>{`${price} (${companyDetails.exchange})`}</p>
+          <p className={styles.lead}>
+            <span className={styles.price}>{`$ ${price}`}</span>
+            {' '}
+            <span className={styles.exchange}>
+              (
+              {companyDetails.exchange}
+              )
+            </span>
+          </p>
         </main>
+        <hr />
         <Details companyDetails={companyDetails} />
-      </>
+      </div>
     );
   }
 

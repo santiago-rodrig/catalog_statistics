@@ -65,3 +65,10 @@ label {
   align-items: center;
   justify-content: space-evenly;
 }
+
+strong {
+  color: #333;
+  background-color: yellow;
+  padding-left: 5px;
+  padding-right: 5px;
+}
