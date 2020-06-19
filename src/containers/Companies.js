@@ -1,7 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addCompanies as updateCompanies, setExchangeFilter, setMinimumFilter } from '../actions';
+import {
+  addCompanies as updateCompanies,
+  setExchangeFilter,
+  setMinimumFilter,
+  setMaximumFilter,
+} from '../actions';
 import CompaniesList from '../components/CompaniesList';
 import loadingGif from '../images/loading.gif';
 import styles from './Companies.module.css';
@@ -19,6 +24,7 @@ const mapStateToProps = state => ({
   companies: state.companies,
   exchangeFilter: state.exchangeFilter,
   minimumFilter: state.minimumFilter,
+  maximumFilter: state.maximumFilter,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -26,11 +32,17 @@ const mapDispatchToProps = dispatch => ({
   resetFilters: () => {
     dispatch(setExchangeFilter(''));
     dispatch(setMinimumFilter(''));
+    dispatch(setMaximumFilter(''));
   },
 });
 
 const Component = ({
-  resetFilters, companies, updateCompanies, exchangeFilter, minimumFilter,
+  resetFilters,
+  companies,
+  updateCompanies,
+  exchangeFilter,
+  minimumFilter,
+  maximumFilter,
 }) => {
   const inputRef = useRef();
   const [fetching, setFetching] = useState(false);
@@ -38,7 +50,7 @@ const Component = ({
   useEffect(() => {
     updateCompanies([]);
     resetFilters();
-  }, [updateCompanies]);
+  }, [updateCompanies, resetFilters]);
 
   useEffect(() => {
     if (fetching) {
@@ -96,6 +108,7 @@ const Component = ({
           companies={companies}
           exchangeFilter={exchangeFilter}
           minimumFilter={minimumFilter}
+          maximumFilter={maximumFilter}
         />
       </>
     );
@@ -123,6 +136,7 @@ Component.propTypes = {
   exchangeFilter: PropTypes.string.isRequired,
   resetFilters: PropTypes.func.isRequired,
   minimumFilter: PropTypes.string.isRequired,
+  maximumFilter: PropTypes.string.isRequired,
 };
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
