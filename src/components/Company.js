@@ -68,6 +68,8 @@ const Details = ({ companyDetails }) => (
 
 Details.propTypes = {
   companyDetails: PropTypes.exact({
+    companyName: PropTypes.string,
+    exchange: PropTypes.string,
     description: PropTypes.string,
     website: PropTypes.string,
     CEO: PropTypes.string,
@@ -90,75 +92,76 @@ const Component = () => {
   const { symbol } = useParams();
 
   useEffect(() => {
-    if (fetching) {
-      window.fetch(
-        `${APIURL}/stock/${symbol}/company${APIToken}`,
-        GETOptions,
-      )
-        .then(response => response.json())
-        .then(data => {
-          const {
-            description,
-            website,
-            industry,
-            CEO,
-            sector,
-            employees,
-            address,
-            state,
-            city,
-            zip,
-            country,
-            phone,
-            exchange,
-            companyName,
-          } = data;
-          setCompanyDetails({
-            exchange,
-            description,
-            website,
-            CEO,
-            industry,
-            sector,
-            employees,
-            address,
-            state,
-            city,
-            zip,
-            country,
-            phone,
-            companyName,
-          });
-        })
-        .then(() => {
-          window.setTimeout(() => {
-            window.fetch(
-              `${APIURL}/stock/${symbol}/price${APIToken}`,
-              GETOptions,
-            )
-              .then(response => response.json())
-              .then(data => setPrice(data));
-          }, 500);
+    window.fetch(
+      `${APIURL}/stock/${symbol}/company${APIToken}`,
+      GETOptions,
+    )
+      .then(response => response.json())
+      .then(data => {
+        const {
+          description,
+          website,
+          industry,
+          CEO,
+          sector,
+          employees,
+          address,
+          state,
+          city,
+          zip,
+          country,
+          phone,
+          exchange,
+          companyName,
+        } = data;
+        setCompanyDetails({
+          exchange,
+          description,
+          website,
+          CEO,
+          industry,
+          sector,
+          employees,
+          address,
+          state,
+          city,
+          zip,
+          country,
+          phone,
+          companyName,
         });
-    }
-    return () => setFetching(false);
-  }, [setPrice, companyDetails, setCompanyDetails, fetching, setFetching]);
+      })
+      .then(() => (new Promise(resolve => {
+        window.setTimeout(() => {
+          resolve(window.fetch(`${APIURL}/stock/${symbol}/price${APIToken}`, GETOptions));
+        }, 500);
+      })))
+      .then(response => response.json())
+      .then(data => {
+        setPrice(data);
+        setFetching(false);
+      });
+  }, [setPrice, setCompanyDetails, setFetching, symbol]);
 
-  return (
-    <>
-      <main>
-        <h1>
-          {`${companyDetails.companyName} (${symbol})`}
-        </h1>
-        <p className={styles.lead}>{`${price} (${companyDetails.exchange})`}</p>
-      </main>
-      {
-        !fetching
-          ? <Details companyDetails={companyDetails} />
-          : <Loading />
-      }
-    </>
-  );
+  let renderedJSX = null;
+
+  if (fetching) {
+    renderedJSX = <Loading />;
+  } else {
+    renderedJSX = (
+      <>
+        <main>
+          <h1>
+            {`${companyDetails.companyName} (${symbol})`}
+          </h1>
+          <p className={styles.lead}>{`${price} (${companyDetails.exchange})`}</p>
+        </main>
+        <Details companyDetails={companyDetails} />
+      </>
+    );
+  }
+
+  return renderedJSX;
 };
 
 export default Component;
