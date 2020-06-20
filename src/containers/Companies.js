@@ -100,8 +100,9 @@ const Component = ({
 
   const handleSubmit = e => {
     e.preventDefault();
-    setFetching(true);
     resetFilters();
+    if (!inputRef.current.value) return;
+    setFetching(true);
   };
 
   let renderedJSX = null;
