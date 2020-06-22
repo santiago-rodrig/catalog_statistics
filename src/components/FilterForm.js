@@ -17,7 +17,7 @@ const Component = () => (
         {' (if you want to)'}
       </span>
     </h2>
-    <form onSubmit={e => e.preventDefault()} className={styles.filter_form}>
+    <form onSubmit={e => e.preventDefault()} className={`panel ${styles.filter_form}`}>
       <NameFilter />
       <ExchangeFilter />
       <MinimumFilter />

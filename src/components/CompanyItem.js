@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import styles from './CompanyItem.module.css';
 
 const Component = ({ company }) => (
-  <li className={styles.item}>
+  <li className={`panel ${styles.item}`}>
     <h3>
       {company.name}
       {` (${company.symbol})`}

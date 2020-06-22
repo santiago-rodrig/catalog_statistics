@@ -1,5 +1,4 @@
 .item {
-  composes: panel from '../index.css';
   max-width: 100%;
   margin-bottom: 2rem;
 }

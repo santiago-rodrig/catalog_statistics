@@ -1,5 +1,4 @@
 .filter_form {
-  composes: panel from '../index.css';
   max-width: 330px;
   margin-top: 2rem;
 }

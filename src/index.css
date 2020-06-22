@@ -29,7 +29,8 @@ body {
   padding-bottom: 5rem;
 }
 
-h1, h2 {
+h1,
+h2 {
   font-weight: 700;
 }
 
@@ -72,6 +73,7 @@ strong {
   padding-left: 5px;
   padding-right: 5px;
 }
+
 .field {
   margin-top: 1rem;
 }

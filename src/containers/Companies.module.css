@@ -7,7 +7,6 @@
 }
 
 .search_form {
-  composes: panel from '../index.css';
   padding: 0.75rem;
   display: flex;
   align-items: center;
