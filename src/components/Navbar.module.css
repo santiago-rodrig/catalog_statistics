@@ -4,4 +4,8 @@
   padding: 2rem;
   text-align: center;
   background-color: #edf2f0;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  border-bottom: 1px solid #333;
 }

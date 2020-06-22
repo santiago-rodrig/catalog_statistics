@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import Home from './Home';
 import Navbar from './Navbar';
 import Company from './Company';
+import Footer from './Footer';
 import styles from './Company.module.css';
 import reducer from '../reducers';
 
@@ -40,6 +41,7 @@ const Component = () => (
         <Route exact path="/:symbol" component={Company} />
         <Route path="*" component={ErrorComponent} />
       </Switch>
+      <Footer />
     </Router>
   </Provider>
 );
