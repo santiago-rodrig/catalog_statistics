@@ -3,10 +3,15 @@ import React from 'react';
 import {
   BrowserRouter as Router, Route, Switch, useLocation,
 } from 'react-router-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import Home from './Home';
 import Navbar from './Navbar';
 import Company from './Company';
 import styles from './Company.module.css';
+import reducer from '../reducers';
+
+const store = createStore(reducer);
 
 const ErrorComponent = () => (
   <div style={{ marginTop: '6rem' }} className="container">
@@ -27,14 +32,16 @@ const ErrorComponent = () => (
 );
 
 const Component = () => (
-  <Router>
-    <Navbar />
-    <Switch>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/:symbol" component={Company} />
-      <Route path="*" component={ErrorComponent} />
-    </Switch>
-  </Router>
+  <Provider store={store}>
+    <Router>
+      <Navbar />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/:symbol" component={Company} />
+        <Route path="*" component={ErrorComponent} />
+      </Switch>
+    </Router>
+  </Provider>
 );
 
 export default Component;

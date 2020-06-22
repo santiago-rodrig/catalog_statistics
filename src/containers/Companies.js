@@ -126,7 +126,7 @@ const Component = ({
 
   return (
     <div className="container">
-      <form onSubmit={handleSubmit} className={styles.search_form}>
+      <form onSubmit={handleSubmit} className={styles.search_form} data-testid="search_form">
         <label htmlFor="symbol">
           Symbol
           <input ref={inputRef} name="symbol" type="text" placeholder="aapl" />

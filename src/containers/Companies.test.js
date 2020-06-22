@@ -5,8 +5,8 @@ import React from 'react';
 import App from '../components/App';
 
 test('it renders a form', () => {
-  const { getByRole } = render(<App />);
-  expect(getByRole('form')).toBeInTheDocument();
+  const { getByTestId } = render(<App />);
+  expect(getByTestId('search_form')).toBeInTheDocument();
 });
 
 test('it renders a textbox', () => {
