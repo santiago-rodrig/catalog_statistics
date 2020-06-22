@@ -122,7 +122,7 @@ const ErrorComponent = () => (
         {' '}
         is not present in the API&apos;s database
       </h1>
-      <iframe title="not found" src="https://giphy.com/embed/9J7tdYltWyXIY" width="330" height="304" frameBorder="0" className="giphy-embed" allowFullScreen />
+      <iframe title="not found" src="https://giphy.com/embed/9J7tdYltWyXIY" width="300" height="290" frameBorder="0" className="giphy-embed" allowFullScreen />
       <p><a href="https://giphy.com/gifs/internet-google-chrone-9J7tdYltWyXIY">via GIPHY</a></p>
     </div>
   </div>
