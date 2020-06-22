@@ -10,7 +10,7 @@
   padding: 0.75rem;
   display: flex;
   align-items: center;
-  max-width: 330px;
+  width: 330px;
 }
 
 .search_form label {
