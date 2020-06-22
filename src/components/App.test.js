@@ -5,7 +5,6 @@ import React from 'react';
 import App from './App';
 
 test('it renders a link to home', () => {
-  const { getByRole, getByTestId } = render(<App />);
-  expect(getByRole('link')).toBeInTheDocument();
+  const { getByTestId } = render(<App />);
   expect(getByTestId('home_link')).toBeInTheDocument();
 });
