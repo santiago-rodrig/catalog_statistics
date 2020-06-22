@@ -136,6 +136,10 @@ const Component = () => {
   const { symbol } = useParams();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     window.fetch(
       `${APIURL}/stock/${symbol}/company${APIToken}`,
       GETOptions,
