@@ -5,6 +5,8 @@
 A catalog of statistics built with React & Redux. The design is inspired
 in [this one](https://www.behance.net/gallery/31579789/Ballhead-App-(Free-PSDs)).
 
+![app gif demo](./doc/demo.gif)
+
 ## Requirements
 
 - node

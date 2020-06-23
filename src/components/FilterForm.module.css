@@ -1,0 +1,18 @@
+.filter_form {
+  max-width: 330px;
+  margin-top: 2rem;
+}
+
+.filter_form label {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.filter_form label > * {
+  flex-basis: 50%;
+}
+
+.filter_form span {
+  text-align: right;
+  padding-right: 0.5rem;
+}

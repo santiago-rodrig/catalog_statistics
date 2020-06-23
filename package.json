@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "normalize.css": "^8.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -17,7 +19,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll",
     "eject": "react-scripts eject",
     "lint:css": "stylelint \"**/*.{css,scss}\"",
     "lint:js": "eslint ."
@@ -44,6 +46,7 @@
     "eslint-plugin-jsx-a11y": "6.2.x",
     "eslint-plugin-react": "7.20.x",
     "eslint-plugin-react-hooks": "2.5.x",
+    "msw": "^0.19.4",
     "node-fetch": "^2.6.0",
     "stylelint": "13.3.x",
     "stylelint-config-standard": "20.0.x",

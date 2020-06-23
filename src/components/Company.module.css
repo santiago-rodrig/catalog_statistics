@@ -1,0 +1,43 @@
+.lead {
+  font-size: 2rem;
+}
+
+.loading {
+  width: 80%;
+  margin-top: 6rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.loading img {
+  display: block;
+  width: 50px;
+  height: 50px;
+  margin-top: 1rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.price {
+  color: limegreen;
+}
+
+.exchange {
+  font-size: 80%;
+  color: rgba(200, 200, 200, 0.7);
+}
+
+.details_section {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.error_component {
+  max-width: 80%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: auto;
+}
